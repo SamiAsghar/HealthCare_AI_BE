@@ -1,99 +1,63 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+---
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# **HealthCare AI: Medical Translation and Transcription App**
 
-## Description
+This project is a BE App that allows users to transcribe speech, translate it into a target language. The application consists **backend** (Node.js (Nest)). The backend is responsible for handling audio processing, transcription, translation, and text-to-speech (TTS).
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## **Table of Contents**
+1. [Code Documentation](#code-documentation)
+   - [Backend Structure](#backend-structure)
+   - [AI Tools](#ai-tools)
+   - [Security Considerations](#security-considerations)
+2. [User Guide](#user-guide)
+   - [Running the Application](#running-the-application)
 
-## Project setup
+---
 
-```bash
-$ npm install
-```
+## **Code Documentation**
 
-## Compile and run the project
+### **Backend Structure**
+The backend is built using **Nest.JS**, a nodejs framework, and handles the following operations:
 
-```bash
-# development
-$ npm run start
+- **Audio Transcription** using **OpenAI’s Whisper API**.
+- **Text Translation** using **OpenAI GPT-4 or GPT-3.5 models**.
+- **Text-to-Speech (TTS)** conversion using **gTTS (Google Text-to-Speech)**.
 
-# watch mode
-$ npm run start:dev
+#### **Backend Routes**
+- **POST /transcribe-and-translate**: Receives the audio recording, performs transcription via OpenAI Whisper, translates the transcribed text using OpenAI, and returns the translation.
+- **POST /text-to-speech**: Accepts the translated text and returns an audio file (Buffer) of the translated text using **OpenAI (tts-1) model**.
 
-# production mode
-$ npm run start:prod
-```
+### **AI Tools**
+- **OpenAI Whisper API**: Used to transcribe the recorded speech into text. This is done via OpenAI's powerful automatic speech recognition (ASR) model, Whisper.
+- **OpenAI GPT-4 or GPT-3.5 Models**: Used to translate the transcribed text into the target language. The translation can be customized based on the target language selected by the user.
+- **OpenAI Text-To-Speech **: Converts the translated text into speech. This audio is returned to the frontend and played on the user's device.
 
-## Run tests
+### **Security Considerations**
+- **Audio File Handling**: Securely handle the audio files processed by the backend to avoid memory issues or security vulnerabilities.
+- **Rate Limiting**: Consider applying rate limiting to API endpoints to prevent abuse or excessive usage of the services (e.g., OpenAI).
+- **CORS**: Properly configure CORS (Cross-Origin Resource Sharing) for API requests from the frontend to the backend.
 
-```bash
-# unit tests
-$ npm run test
+---
 
-# e2e tests
-$ npm run test:e2e
+## **User Guide**
 
-# test coverage
-$ npm run test:cov
-```
+### **Running the Application**
 
-## Deployment
+#### **Set Up the Backend**
+1. **Install Dependencies**:
+   You’ll need to install Node.JS and its dependencies:
+   ```bash
+   npm run install 
+   ```
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+2. **Set Up OpenAI API**:
+   - You need an OpenAI account and API key. Set up the OpenAI account and create an API Key:
+   - Make sure your environment variables for OpenAI API credentials are properly configured.
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+3. **Run the NodeJS Backend**:
+   To start the backend server, run:
+   ```bash
+   npm run start:dev
+   ```
+   The BE app will run on `http://127.0.0.1:3000`, and you’ll be able to interact with the frontend from this address.
