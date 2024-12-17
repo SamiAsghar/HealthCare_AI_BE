@@ -26,7 +26,7 @@ import {Multer} from 'multer';
         if (!file) {
             throw new HttpException('No audio file provided', HttpStatus.BAD_REQUEST);
           }
-          const tempFilePath = path.resolve(`./tmp/${file.originalname}`);
+          const tempFilePath = path.join('/tmp', file.originalname);
           await fs.promises.writeFile(tempFilePath, file.buffer);
 
           const targetLanguage = body.target_language || 'es';
