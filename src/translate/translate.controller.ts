@@ -43,7 +43,7 @@ export class TranslateController {
     @Body() body: { text: string; target_language: string },
   ) {
     const response = await this.translateService.textToSpeech(
-      body.text
+      body.text 
     );
     return response;
   }
